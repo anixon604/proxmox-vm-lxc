@@ -18,12 +18,16 @@ fi
 
 if [ "$type" == "lxc" ]; then
     cp -r terraform/templates/basic_lxc terraform/$name
-    mv terraform/$name/example.tfvars terraform/$name/terraform.tfvars
+    if [ ! -f terraform/$name/terraform.tfvars ]; then
+        mv terraform/$name/example.tfvars terraform/$name/terraform.tfvars
+    fi
     # replace the name in variables.tfvars file with the new name
     sed -i '' "s/^hostname[[:space:]]*=.*/hostname = \"$name\"/" terraform/$name/terraform.tfvars
 elif [ "$type" == "vm" ]; then
     cp -r terraform/templates/basic_vm terraform/$name
-    mv terraform/$name/example.tfvars terraform/$name/terraform.tfvars
+    if [ ! -f terraform/$name/terraform.tfvars ]; then
+        mv terraform/$name/example.tfvars terraform/$name/terraform.tfvars
+    fi
     # replace the name in variables.tfvars file with the new name
     sed -i '' "s/^name[[:space:]]*=.*/name = \"$name\"/" terraform/$name/terraform.tfvars
 fi

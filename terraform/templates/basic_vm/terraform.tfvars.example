@@ -1,0 +1,31 @@
+name         = "vm1"
+target_node  = "pve"
+clone        = "ubuntu24-cloudinit" # you need to have a template existing
+
+cores        = 2
+sockets      = 1
+memory       = 2048
+
+disk_size    = "8G"
+storage      = "local-lvm"
+
+bridge       = "vmbr0"
+ciuser       = "clouduser"
+cipassword   = "securepassword"
+
+sshkeys      = "your public key string"
+
+# ip_address   = null
+# netmask      = null
+# gateway      = null
+use_dhcp     = true
+
+pm_api_url   = "https://your-host:8006/api2/json"
+pm_user      = "root"
+
+pve_host     = "your-host"
+pve_user     = "root"
+pve_private_key = "private key PATH with access to host"
+
+packages     = ["qemu-guest-agent"]
+tags         = ["production", "database"]

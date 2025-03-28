@@ -1,0 +1,30 @@
+# example.tfvars
+
+hostname     = "my-container"
+target_node  = "pve"
+ostemplate   = "local:vztmpl/ubuntu-24.10-standard_24.10-1_amd64.tar.zst"
+root_password = "rootroot"  # Default value from variables.tf
+
+cores        = 2
+memory       = 1024
+swap         = 512  # Default value from variables.tf
+
+storage      = "local-lvm"
+rootfs_size  = "4G"
+
+bridge       = "vms"
+# ip_address   = ""  # Default value from variables.tf
+# gateway      = ""    # Default value from variables.tf
+# netmask      = ""    # Default value from variables.tf
+use_dhcp     = true   # Default value from variables.tf
+
+lxc_ssh_public_keys = "your public key string"  # Default value from variables.tf
+lxc_ssh_private_key = "matching private key PATH"
+
+pm_api_url   = "https://you-host:8006/api2/json"
+packages     = ["curl", "vim", "git"]  # Example packages
+tags         = ["web", "production"]  # Example tags
+
+pve_user     = "root"  # Default value from variables.tf
+pve_host     = "your host"   # Default value from variables.tf
+pve_private_key = "private key PATH with access to host"
