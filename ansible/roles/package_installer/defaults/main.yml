@@ -1,0 +1,9 @@
+---
+# Default list of packages to install
+package_installer_packages:
+  - vim
+  - curl
+  - wget
+  - htop
+  - net-tools
+package_installer_package_action: present

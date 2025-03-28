@@ -1,0 +1,10 @@
+---
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600  # Update the cache if it's older than 1 hour
+
+- name: Install or remove packages
+  ansible.builtin.package:
+    name: "{{ package_installer_packages }}"
+    state: "{{ package_installer_package_action }}"

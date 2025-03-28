@@ -1,0 +1,8 @@
+---
+- name: Uninstall packages on target hosts
+  hosts: all
+  become: true
+  roles:
+    - role: package_installer
+      vars:
+        package_installer_package_action: absent  # Set to 'absent' to uninstall packages
