@@ -74,6 +74,12 @@ variable "lxc_ssh_public_keys" {
   default     = ""
 }
 
+variable "lxc_ssh_private_key" {
+  description = "Path to private SSH key to inject into container"
+  type        = string
+  sensitive   = true
+}
+
 variable "root_password" {
   description = "Root password for the container"
   type        = string
@@ -130,5 +136,11 @@ variable "pve_private_key" {
   description = "Proxmox private key"
   type        = string
   sensitive   = true
+}
+
+variable "apt_cacher_ng_endpoint" {
+  description = "The endpoint URL for apt-cacher-ng (e.g., http://10.20.88.2:3142)"
+  type        = string
+  default     = null
 }
 

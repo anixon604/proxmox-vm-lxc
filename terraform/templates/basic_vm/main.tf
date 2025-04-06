@@ -14,7 +14,7 @@ provider "proxmox" {
 }
 
 module "vm" {
-  source         = "../modules/qemu" # or "../modules/lxc"
+  source         = "../../terraform/modules/qemu" # relative to instance folder
   name           = var.name
   target_node    = var.target_node
   clone          = var.clone

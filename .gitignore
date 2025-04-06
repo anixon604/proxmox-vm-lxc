@@ -27,6 +27,16 @@ terraform.rc
 .terraform.lock.hcl
 .python-version
 
+# Ignore VSCode settings
+.vscode/*
+
 **/files/*
 
 **/inventory.ini
+
+# Allow only the needed terraform files
+!/terraform/modules/
+!/terraform/templates/
+
+# Ignore instances
+**/instances/*

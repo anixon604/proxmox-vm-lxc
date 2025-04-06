@@ -63,6 +63,7 @@ resource "proxmox_vm_qemu" "vm" {
   network {
     id = 0
     bridge = var.bridge
+    firewall = false
     model  = "virtio"
   }
 

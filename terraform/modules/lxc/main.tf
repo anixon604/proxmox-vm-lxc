@@ -40,8 +40,8 @@ resource "proxmox_lxc" "container" {
 
   # Add tags or custom identifiers
   tags = join(",", compact(concat(["managed-by-terraform"], var.tags != null ? var.tags : [])))
-
 }
+
 data "external" "get_lxc_ip" {
   program = ["bash", "${path.module}/get_lxc_ip.sh"]
 
@@ -53,4 +53,29 @@ data "external" "get_lxc_ip" {
   }
 
   depends_on = [proxmox_lxc.container]
+}
+
+# Configure apt-cacher-ng in a separate resource
+resource "null_resource" "apt_cacher_config" {
+  count = var.create_lxc && var.apt_cacher_ng_endpoint != null ? 1 : 0
+
+  triggers = {
+    container_id = proxmox_lxc.container[0].id
+  }
+
+  provisioner "remote-exec" {
+    connection {
+      type        = "ssh"
+      user        = "root"
+      private_key = file(var.lxc_ssh_private_key)
+      host        = data.external.get_lxc_ip.result.ip
+    }
+
+    inline = [
+      "echo 'Acquire::http::Proxy \"${var.apt_cacher_ng_endpoint}\";' > /etc/apt/apt.conf.d/01proxy",
+      "echo 'Acquire::https::Proxy \"${var.apt_cacher_ng_endpoint}\";' >> /etc/apt/apt.conf.d/01proxy"
+    ]
+  }
+
+  depends_on = [data.external.get_lxc_ip]
 }

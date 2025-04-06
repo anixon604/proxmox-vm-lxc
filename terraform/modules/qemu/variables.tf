@@ -132,3 +132,9 @@ variable "tags" {
   type        = list(string)
   default     = []
 }
+
+variable "apt_cacher_ng_endpoint" {
+  description = "The endpoint URL for apt-cacher-ng (e.g., http://10.20.88.2:3142)"
+  type        = string
+  default     = null
+}

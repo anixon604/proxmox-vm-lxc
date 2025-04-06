@@ -14,7 +14,7 @@ provider "proxmox" {
 }
 
 module "lxc" {
-  source = "../modules/lxc"
+  source = "../../terraform/modules/lxc" # relative to instance folder
   hostname = var.hostname
   target_node = var.target_node
   ostemplate = var.ostemplate
@@ -28,6 +28,7 @@ module "lxc" {
   ip_address = var.ip_address
   gateway = var.gateway
   lxc_ssh_public_keys = var.lxc_ssh_public_keys
+  lxc_ssh_private_key = var.lxc_ssh_private_key
   create_lxc = var.create_lxc
   pm_api_url = var.pm_api_url
   use_dhcp = var.use_dhcp
